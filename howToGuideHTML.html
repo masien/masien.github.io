@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF=8">
+		<title>USDA API: How-To Guide</title>
+		<link rel="stylesheet" href="howToGuideStyle.css" type="text/css">
+	</head>
+	<body>
+		<h1 class="centerText"><b><u>USDA API: How-To Guide</u></b></h1>
+		<p class="centerText">by Nick Masie
+	
+		<br>
+		<br>
+		<br>
+		
+		<img src="HowToGuideImgs/USDA-logo2.gif" class="centerImage">
+		
+		<ul>
+			<li>
+				<h3>What is the USDA?</h3>
+			</li>
+			<ul>
+				<li>
+					<p>The USDA (United States Department of Agriculture) is responsible for many regulations 
+						of America's agricultural industry such as setting health and safety standards, ensuring 
+						that agricultural items such as meat, poultry, dairy, etc. is produced and labeled
+						according to said standards, provide assistance and education to improve public
+						health, maintain various databases of leading scientific research and the various
+						agricultural items with their up-to-date information, and much more.  More info 
+						regarding the USDA can be found on their <a href="https://www.usda.gov/">USDA website
+						</a>.</p>	
+				</li>
+			</ul>
+			<li>
+				<h3>What is the USDA API?</h3>
+			</li>
+			<ul>
+				<li>
+					<p>To begin we will briefly discuss what an API is in the first place.  API is short for
+						application programming interface, and if you have ever programmed before, then you
+						will find that they are very similar to libraries of functions and information used
+						to access and manipulate particular information for the purposes of something like a
+						web application.  Technically, an API is defined as "a set of subroutine definitions,
+						protocols, and tools for building application software.  In other words, API's are 
+						kind of like building blocks for various software applications, and all different 
+						types of companies like Facebook, Google, etc. have web API's that programmers can 
+						then use to make their software applications that will then access and use certain 
+						nformation obtained from Facebook or Google.</p>
+				</li>
+				<li>
+					<p>Next, we will briefly discuss the USDA API in particular, which provides Rest access to
+						the USDA Food Composition Database.  The USDA API can be used for 
+						a massive variety of purposes, but we will keep it fairly simple for this how-to guide.  
+						We will be performing a generic search within the food product database for food items 
+						by entering a key words such as "chocolate", and the result will be an array of food 
+						items containing that key word along with a variety of information related to that food 
+						item such as its name, location in the array, group, NBD ID number, and data source.  
+						There will be more on all of this later.  This information, at least as is, may not be 
+						particulary useful in the grand scheme of potential possibilities for API/software 
+						applications, but something along these lines could definitely be incorporated into 
+						useful software applications that present users with a nice GUI (graphical user interface) 
+						displaying the array, its contents, and all of the information related to each item in 
+						the array.</p>
+				</li>
+				<li>
+					<p>Finally, we will discuss some of the basic uses of the USDA API.  One can use the USDA
+						API to request information on Food Reports (nutrient reports on individual foods), lists
+						(lists of foods, nutrients, or food groups), nutrient reports (reports for foods by one 
+						or more nutrients), and generic searches (free text to locate foods in the database).  
+						As mentioned above, we will be performing generic searches to locate foods in the 
+						database.  Before we can begin to utilize the USDA API, we must obtain an API key from
+						the website, which we will discuss later.  The USDA has set the current limit of API
+						requests to a default rate of 1,0000 requests per hour per IP address.  The API 
+						documentation states that if a user exceeds this limit, then that user's IP will be 
+						temporarily blocked for one hour, unless the user has previously contacted the USDA 
+						in regards to gaining access to a higher rate of requests for pre-approved purposes.</p>
+				</li>
+				<li>
+					<p><a href="https://ndb.nal.usda.gov/ndb/api/doc">The full USDA API documention can be found 
+					here.</a>
+				</li>
+			</ul>
+			<li>
+				<h3>How To Set It Up:</h3>
+			</li>
+			<ul>
+				<li>
+					<p>A data.gov API key is required to access and use the USDA API, but obtaining the key and
+						using the API is completely free and accessible to anyone.  One may sign up for an account 
+						and obtain a key by going to the <a href="https://ndb.nal.usda.gov/ndb/api/doc">main page 
+						of the USDA API documentation</a> and clicking the "Sign up now" link, which will cause
+						a small window/application to pop up on the screen requesting the user to input their 
+						sign up information.  It is important to note that once you receive your API key and
+						ensure that it works, DO NOT share your key with anyone because that API key is linked to 
+						your IP address, so you will be held responsible for any and all activity involving that 
+						key.  A screenshot of the described portion of the documentation page is shown below:</p>
+					<img src="HowToGuideImgs/apiKey1.png">
+					<br>
+					<br>
+					<img src="HowToGuideImgs/apiSignUp2.png">
+				</li>
+			</ul>
+			<li>
+				<h3>How To Interact With It:</h3>
+			</li>
+			<ul>
+				<li>
+					<p>As previously stated above, one can interact with the USDA API in a variety of ways which
+						all differ in terms of how to query the data, what data/information is being queried, how
+						it is returned, etc., but for this how-to guide, we will be focusing on generic searches
+						to locate foods in the database.  We also previously discussed how these generic searches
+						will be performed by entering key words such as "chocolate", and the result will be an 
+						array of food items containing that key word along with a variety of information related 
+						to that food item such as its name, location in the array, group, NBD ID number, and data 
+						source.  Now we will discuss the details in performing searches like this.  Detailed
+						information regarding these searches can be found in the 
+						<a href="https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md">"Food Search" portion 
+						of the API documention.</a>
+				</li>
+				<li>
+					<h4>Breaking Down The URL/Query String: </h4>
+					<p><em class="highlight"><b><i>https://api.nal.usda.gov/ndb/search/?format=json&q=chocolate&sort=n&max=25&offset=0&api_key=DEMO_KEY</i></b></em></p>
+				</li>
+				<ul>
+					<li>
+						<p>Base URL: <em class="highlight"><b><i>https://api.nal.usda.gov/ndb/search</i></b></em></p>
+					</li>
+					<ul>
+						<li>
+							<p>The URL above is the base URL upon which all search queries are based on and begin 
+							with.</p>
+						</li>
+						<li>
+							<p>First, <em class="highlight"><b><i>https://api.nal.usda.gov</i></b></em> is the base address which specifies the
+								web address of the API that we are working with (the USDA API).</p>
+						</li>
+						<li>
+							<p>Next, <em class="highlight"><b><i>/ndb/search</i></b></em> specifies which part of the USDA API we will be working with, 
+								which is performing generic searches within the USDA National Nutrient Database.</p>
+						</li>
+					</ul>
+					<li>
+						<p>Search Parameters: <em class="highlight"><b><i>/?format=json&q=chocolate&sort=n&max=25&offset=0&api_key=DEMO_KEY</i></b></em>
+					</li>
+					<ul>
+						<li>
+							<p> This is the portion of the URL where the "query string" begins.</p>
+						</li>
+						<li>
+							<p>First, <em class="highlight"><b><i>/?format=json</i></b></em> specifies that we want to be working with data formatted in
+								JSON (JavaScript Object Notation).</p>
+						</li>
+						<li>
+							<p>Next, <em class="highlight"><b><i>&q=chocolate</i></b></em> is the main key word/food item that we want to search for within 
+								the database, so in this case, we are searching for food items containing the key 
+								word "chocolate." </p>
+						</li>
+						<li>
+							<p>Next, <em class="highlight"><b><i>&sort=n</i></b></em> specifies the way our resulting data (an array of food items) will be
+								sorted.  There are two options for sort values here: "n" sorts the results by food
+								name, and "r" (default) sorts the results by relevance.  We have chosen "n" to sort
+								by name because it simply returns our data in a more organized and predictable way.</p>
+						</li>
+						<li>
+							<p>Next, <em class="highlight"><b><i>&max=25</i></b></em> specifies the maximum number of food items we want returned in the 
+								array of food items resulting from our search.</p>
+						</li>
+						<li>
+							<p>Next, <em class="highlight"><b><i>&offset=0</i></b></em> indicates the index of particular food item in the resulting array
+								that we want to access (0-24 in our case of max = 25).  Because our data will be
+								alphabetically sorted by name, we can continually increase our index and predictably
+								expect to get the next food item from the search in alphabetical order as we progress
+								through the array.
+						</li>
+						<li>
+							<p>Finally, <em class="highlight"><b><i>&api_key=DEMO_KEY</i></b></em> is where the user must insert the api key that was received from
+								signing up as described above.  Nothing will work without this api key inserted.
+						</li>
+					</ul>
+					<li>
+						<p>Final URL for the Query: <em class="highlight"><b><i>https://api.nal.usda.gov/ndb/search/?format=json&q=chocolate&sort=n&max=25&offset=0&api_key=DEMO_KEY</i></b></em></p>
+					</li>
+					<ul>
+						<li>
+							<p>So in summary, this query will return the JSON data of 25 food items containing the key 
+								word "chocolate", sorted in alphabetical order, and beginning with the first item in the 
+								array at index 0.</p>
+						</li>
+					</ul>
+				</ul>
+				<li>
+					<h4>Performing a Search With Our URL: </h4>
+				</li>
+				<ul>
+					<li>
+						<p>First, to check that our URL is correct and to perform the most basic of search methods
+							with our final URL constructed above, simply plug the URL into your web
+							browser.  The result in the browser should look something like the image below: </p>
+						<img src="HowToGuideImgs/rawDataResults.png">
+					</li>
+					<li>
+						<p>If your web browser looks something like the image above, then congrats!  You are now
+							ready to begin coding with JavaScript.  If not, please refollow the steps, explore
+							the official API documentation, make sure there are no typos, and check your web
+							browser settings.</p>
+					</li>
+					<li>
+						<p>As we stated above, simply plugging the final URL into the web browser is perhaps the
+							most basic of methods to perform searches such as this, especially if we want to perform
+							multiple different searches and display the data in a more presentable and user-friendly
+							way.  This is where we finally begin to create an actual web application by using HTML 
+							forms, JavaScript, and GET requests in order to access these items in the array and their
+							properties, which will soon be discussed further in detail.</p>
+					</li>
+				</ul>
+				<li>
+					<h4>Implementing a Search into an HTML/JavaScript Application</h4>
+				</li>
+				<ul>
+					<li>
+						<p>This application example is going to produce a form that gathers input from the user 
+							(such as the food item we want to search for), assign those input values to variables 
+							in order to make a GET request, and will then return and display the actual data results 
+							that we get back.  This may seem like a very and not particularly useful application, but 
+							its concepts can be used to create a variety of applications.  A simple (but non-functional)
+							JSFiddle application along with its code will be embedded below so that you can use it as a
+							visual aid follow along with this example.  Keep in mind that this embedded JSFiddle 
+							application itself will not work because JSFiddle is not capable of performing these types 
+							of database GET requests, but if you copy and paste the code into your own html/js files then 
+							voila, it will magically work.</p>
+							
+							<iframe 
+								style="width: 100%; height: 300px" 
+								src="https://jsfiddle.net/masien/4rje3mdh/embedded">
+							</iframe>
+
+
+					</li>
+					<li>
+						<p><a href="file:///D:/CS%20290/How-To-Guide/usdaAPIsearch.html">Here is a link to the fully functional web application.</a></p>
+					</li>
+					<li>
+						<p>First, let's quickly revisit our URL that we broke down earlier as this will be essential to
+							formulating our GET request.  The variables involved in the full URL include:</p>
+					</li>
+					<ul>
+						<li>
+							<p>the base URL</p>
+						</li>
+						<li>
+							<p>var SearchFoodItem: the main key word that we want to search for</p>
+						</li>
+						<li>
+							<p>var sortMethod: the sort method</p>
+						</li>
+						<li>
+							<p>var maxFoodItems: the maximum number of results we want</p>
+						</li>
+						<li>
+							<p>var indexInArray: the item in the array that we currently want to look at</p>
+						</li>
+						<li>
+							<p>var apiKey: the API key</p>
+						</li>
+						<img src="HowToGuideImgs/URLvariables.png">
+					</ul>
+					<li>
+						<p>In this example, the user will only be inputting the main key word to be searched for (i.e. 
+							the food item) and the item in the array to be displayed to the screen.  The programmer is 
+							of the application is responsible for filling in the rest of the variables' values in 
+							JavaScript, such as the base URL, sort method, maximum number of results, and the API key.  
+							If you look at the JavaScript code in the JSFiddle example above, you will be able to see 
+							the difference between the variables with "hard-coded values" (i.e. filled by the programmer
+							beforehand) and the variables that get assigned their values according to the user's input as
+							was just described earlier.  Now that we have created JavaScript variables to hold particular
+							values to form the fullURL/query string, we are now ready to submit a GET request.</p>
+					</li>
+					<li>
+						<p>Next, we will begin the process of submitting a GET request.</p>
+					</li>
+					<ul>
+						<li>
+							<p>We must first establish the req variable (short for 
+								request) and assign it the value of a new instance of an XMLHttpRequest with the line of code 
+								<em class="highlight">var req = new XMLHttpRequest()</em>.</p>
+						</li>
+						<li>
+							<p>Next comes the <em class="highlight">req.open("GET", fullURL, true)</em> command, which 
+								opens the request instance to asynchronously (specified by true value) send a GET request to 
+								the URL within the fullURL variable that we just built.
+						</li>
+						<li>
+							<p>Next, we must use the command 
+								<em class="highlight">req.send(null)</em> to specify that we are not sending any additional 
+								information with the request.</p>
+						</li>
+						<li>
+							<p>Next, we must store the response we get from our request in a variable with the line of code 
+								<em class="highlight">var response = JSON.parse(req.responseText)</em>, which basically parses the response text to JSON so
+								that it appears neatly in object notation.</p>
+						</li>
+						<li>
+							<p>Now that we have our data stored in the response object/variable, we can then access that data
+								via the appropriate properties of that response object (i.e. offset, name, group, ndbno, and ds).</p>
+						</li>
+					</ul>
+					<li>
+						<p>Now that we have stored the response of our request from the server, we can finally begin accessing
+							and using the data!  This is done with the lines of code that look like this:
+							document.getElementById("foodName").textContent = response.list.item[indexInArray].name;, where
+							everything on the left side of the equals sign is accessing an element from the HTML page to neatly
+							output the data, and everything to the right of the equals sign is the part of the code that is
+							actually accessing the data from our response.  The response data that we are interested in for this
+							example is the offset/index number in the array, name, group, NDB number, and DS, so whenever we submit
+							our query, the HTML elements will be populated and updated with the appropriate resulting data.</p>
+						<br>
+						<br>
+						<img src="HowToGuideImgs/usdaAPIsearchResults.png">
+						<br>
+						<br>
+					</li>
+					<li>
+						<p>To check your results, try opening two tabs: one with the web application containing the form to submit
+							the query, and another with just the simple fullURL/query string plugged into the address of the browser.
+							Make sure that your search parameters are all exactly the same, and then make sure that each item, its
+							location in the array, and all of its related information match between the two pages.  Notice how in the 
+							image above, our results with searching for "chocolate" at index two matches up exactly with the image 
+							of our full URL/query string plugged into the address of the browser.  If everything matches, then
+							congrats, your first web application using the USDA API is fully functional!  Now you can begin to experiment
+							with different possibilities to utilize this API for your very own web application purposes.</p>
+					</li>
+				</ul>
+			</ul>
+		</ul>
+		<br>
+		<img src="HowToGuideImgs/usdaApproved.jpg" class="centerImage">
+	
+		<script src="howToGuideScript.js"></script>
+	</body>
+</html>
