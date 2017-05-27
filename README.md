@@ -1,2 +1,2 @@
-# https://masien.github.io
+# masien.github.io
 USDA API How-To Guide Website
