@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF=8">
+		<title>USDA API: Search</title>
+	</head>
+	<body>
+		<form>
+			<fieldset>
+				<legend>USDA API Search</legend>
+				<label for="foodItem">Food Item: </label>
+				<input type="text" name="inputFoodItem" id="inputFoodItem">
+				
+				<br>
+				<br>
+				
+				<label for="foodIndex">Index in Array: </label>
+						<input type="number" name="inputFoodIndex" id="inputFoodIndex">
+				
+				<br>
+				<br>
+				
+				<input type="submit" id="submitFoodItem" value="Submit Food Item" />
+				
+				<br>
+				
+				<div>
+				  <h3>Results: </h3>
+				  <ul>
+					<li><span>Index: </span><span id="foodIndex"></span></li>
+					<li><span>Name: </span><span id="foodName"></span></li>
+					<li><span>Group: </span><span id="foodGroup"></span></li>
+					<li><span>NDB No.: </span><span id="foodNDBNo"></span></li>
+					<li><span>DS: </span><span id="foodDS"></span></li>
+				  </ul>
+				</div>
+			</fieldset>
+		</form>
+	
+		<script src="usdaAPIsearch.js"></script>
+	</body>
+</html>
