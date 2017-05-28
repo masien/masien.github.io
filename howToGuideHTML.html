@@ -282,21 +282,21 @@
 						<li>
 							<p>We must first establish the req variable (short for 
 								request) and assign it the value of a new instance of an XMLHttpRequest with the line of code 
-								<b><em class="highlight">var req = new XMLHttpRequest()</em></b>.</p>
+								<em class="highlight"><b>var req = new XMLHttpRequest()</b></em>.</p>
 						</li>
 						<li>
-							<p>Next comes the <b><em class="highlight">req.open("GET", fullURL, true)</em></b> command, which 
+							<p>Next comes the <em class="highlight"><b>req.open("GET", fullURL, true)</b></em> command, which 
 								opens the request instance to asynchronously (specified by true value) send a GET request to 
 								the URL within the fullURL variable that we just built.
 						</li>
 						<li>
 							<p>Next, we must use the command 
-								<b><em class="highlight">req.send(null)</em></b> to specify that we are not sending any additional 
+								<em class="highlight"><b>req.send(null)</b></em> to specify that we are not sending any additional 
 								information with the request.</p>
 						</li>
 						<li>
 							<p>Next, we must store the response we get from our request in a variable with the line of code 
-								<b><em class="highlight">var response = JSON.parse(req.responseText)</em></b>, which basically parses the response text to JSON so
+								<em class="highlight"><b>var response = JSON.parse(req.responseText)</b></em>, which basically parses the response text to JSON so
 								that it appears neatly in object notation.</p>
 						</li>
 						<li>
